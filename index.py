@@ -4,6 +4,7 @@ import sys
 import time
 import glob
 import datetime
+import pandas as pd
 import numpy as np  # get it at: http://numpy.scipy.org/
 from dotenv import load_dotenv
 
@@ -51,28 +52,32 @@ def apply_to_all_files(basedir, func=lambda x: x, ext='.h5'):
 # we can now easily count the number of files in the dataset
 print('number of song files:', apply_to_all_files(msd_subset_path))
 
-# let's now get all artist names in a set(). One nice property:
-# if we enter many times the same artist, only one will be kept.
-all_artist_names = set()
-
-# we define the function to apply to all files
-def func_to_get_artist_name(filename):
-    """
-    This function does 3 simple things:
-    - open the song file
-    - get artist ID and put it
-    - close the file
-    """
+# define a function to extract the data for each file
+def func_to_get_data(filename):
     h5 = GETTERS.open_h5_file_read(filename)
     artist_name = GETTERS.get_artist_name(h5)
-    all_artist_names.add(artist_name)
+    song_title = GETTERS.get_title(h5)
+    year = GETTERS.get_year(h5)
+    tempo = GETTERS.get_tempo(h5)
     h5.close()
+    return {'artist_name': artist_name,
+            'song_title': song_title,
+            'year': year,
+            'tempo': tempo}
 
-# let's apply the previous function to all files
-# we'll also measure how long it takes
+# create a list to hold the extracted data
+data_list = []
+
+# extract data for each file in the MSD subset
 t1 = time.time()
-apply_to_all_files(msd_subset_path, func=func_to_get_artist_name)
+apply_to_all_files(msd_subset_path, func=lambda x: data_list.append(func_to_get_data(x)))
 t2 = time.time()
 print('all artist names extracted in:', strtimedelta(t1, t2))
 
-# let's see some of the content
+# create a Pandas dataframe from the list
+df = pd.DataFrame(data_list)
+
+# print the dataframe
+print(df)
+
+
