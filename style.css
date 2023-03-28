@@ -1,0 +1,7 @@
+label, h1, button, select, option {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+    margin-bottom: 10px;
+}
