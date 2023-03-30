@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mood Music Generator</title>
+        <link href="style.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body align="center">
+        <h1>Mood Music Generator</h1>
+
+        <div id="moodSelectors"> 
+            <label for="moods">Select a mood you are feeling currently:</label>
+            <select name="moods" id="moods">
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="excited">Excited</option>
+                <option value="sleepy">Sleepy</option>
+                <option value="chill">Chill</option>
+            </select>
+        </div>
+
+        <div id="durationSelector">
+            <form action="/output" method="post">
+                <ul>
+                    <ul>
+                        <label for="duration">Duration:</label>
+                        <input type="number" name="playlistSize" id="duration" min="8" max="180">
+                    </ul>
+                    
+                    <ul>
+                        <label for="artist">Artist:</label>
+                        <input type="text" name="artistName" id="artist">
+                    </ul>
+                    <ul>
+                        <label for="title">Song Title:</label>
+                        <input type="text" name="songTitle" id="title">
+                    </ul>
+                    
+                    <ul>
+                        <button type="submit">Submit</button>
+                    </ul>   
+                </ul>
+                
+            </form>
+        </div>
+
+    </body>
+</html>
