@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
+from api.endpoints import artists, songs, clustering
 
 app = FastAPI()
 
@@ -26,16 +27,18 @@ async def generate_music(
         "artistName": artistName,
         "songTitle": songTitle
     }
-    print(form_data)
-    return {"message": "Music generated successfully"}
+    
+    resp = clustering.cluster(form_data)
+
+    return resp
 
 @app.get("/api/artist")
 def get_artist():
-    return {"message": "Artist name"}
+    return artists.get_artists()
 
 @app.get("/api/song_title")
 def get_song_title():
-    return {"message": "Song title"}
+    return songs.get_songs()
 
 if __name__ == "__main__":
     import uvicorn
