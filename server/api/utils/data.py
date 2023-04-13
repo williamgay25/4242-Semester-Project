@@ -16,7 +16,7 @@ load_dotenv()
 msd_subset_path = os.getenv('DATA_PATH')
 
 # imports specific to the MSD
-sys.path.append('./MSongsDB/PythonSrc/')
+sys.path.append('../../MSongsDB/PythonSrc/')
 import hdf5_getters as GETTERS
 
 # the following function simply gives us a nice string for
