@@ -29,6 +29,14 @@ async def generate_music(
     print(form_data)
     return {"message": "Music generated successfully"}
 
+@app.get("/api/artist")
+def get_artist():
+    return {"message": "Artist name"}
+
+@app.get("/api/song_title")
+def get_song_title():
+    return {"message": "Song title"}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="localhost", port=5000, log_level="info")
