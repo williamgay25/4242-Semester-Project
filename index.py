@@ -79,5 +79,3 @@ df = pd.DataFrame(data_list)
 
 # print the dataframe
 print(df)
-
-
