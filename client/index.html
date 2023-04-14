@@ -10,27 +10,31 @@
         <div id="durationSelector">
             <form action="/output" method="post" name="myForm">
                 <ul>
-                    <ul>
-                        <label for="duration">Duration in min:</label>
-                        <input type="number" name="playlistSize" id="duration" min="8" max="180">
-                    </ul>
-                    
-                    <ul>
-                        <label for="artist">Artist:</label>
-                        <input type="text" name="artistName" id="artist">
-                    </ul>
-                    <ul>
-                        <label for="title">Song Title:</label>
-                        <input type="text" name="songTitle" id="title">
-                    </ul>
-                    
-                    <ul>
-                        <button type="submit">Submit</button>
-                    </ul>   
+                    <label for="duration">Duration in min:</label>
+                    <input type="number" name="playlistSize" id="duration" min="8" max="180">
                 </ul>
-                
+                <ul>
+                    <label for="artist">Artist:</label>
+                    <select name="artistName" id="artist">
+                        <option value="0">Select an artist</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label for="title">Song Title:</label>
+                    <select name="songTitle" id="title">
+                        <option value="0">Select a song</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label for="year">Year:</label>
+                    <input type="text" name="playlistYear" id="year">
+                </ul>
+                <ul>
+                    <button type="submit">Submit</button>
+                </ul>   
             </form>
         </div>
         <script src="script.js"></script>
     </body>
 </html>
+
