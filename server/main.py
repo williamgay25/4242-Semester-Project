@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
-from api.endpoints import artists, songs, clustering
+from api.endpoints import artists, songs, cluster
 
 app = FastAPI()
 
@@ -20,23 +20,25 @@ app.add_middleware(
 async def generate_music(
     playlistSize: int = Form(...),
     artistName: str = Form(...),
-    songTitle: str = Form(...)
+    songTitle: str = Form(...),
+    playlistYear: int = Form(...),
 ):
     form_data = {
         "playlistSize": playlistSize,
         "artistName": artistName,
-        "songTitle": songTitle
+        "songTitle": songTitle,
+        "playlistYear": playlistYear,
     }
-    
-    resp = clustering.cluster(form_data)
+
+    resp = cluster.cluster(form_data["songTitle"], form_data["artistName"], form_data["playlistYear"], form_data["playlistSize"])
 
     return resp
 
-@app.get("/api/artist")
+@app.get("/api/artists")
 def get_artist():
     return artists.get_artists()
 
-@app.get("/api/song_title")
+@app.get("/api/songs")
 def get_song_title():
     return songs.get_songs()
 
