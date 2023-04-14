@@ -1,4 +1,5 @@
 const form = document.forms.myForm;
+const playlistElement = document.getElementById('playlist'); // Add this line
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -9,8 +10,21 @@ form.addEventListener('submit', async (event) => {
         body: formData
     });
     const data = await response.json();
-    console.log(data)
-    // Do something with the response data
+    console.log(data);
+    
+    playlistElement.innerHTML = '';
+
+    // Add the response data to the playlist element
+    for (let i = 0; i < data.length; i++) {
+        const group = data[i];
+        const groupElement = document.createElement('ul');
+        for (let j = 0; j < group.length; j++) {
+            const itemElement = document.createElement('li');
+            itemElement.innerText = group[j];
+            groupElement.appendChild(itemElement);
+        }
+        playlistElement.appendChild(groupElement);
+    }
 });
 
 async function fetchArtists() {
@@ -51,4 +65,3 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM loaded")
     populateDropdowns();
 });
-  
