@@ -60,95 +60,98 @@
                 <div class="w3-teal w3-round-large">
                     <div class="container items-center px-6 mt-4 space-y-0">
                         <!-- coming soon and paragraph -->
-                        <div class="flex flex-col py-6 mb-10 space-y-4">
-                            <h2 class="max-w-5xl text-5xl font-bold text-center md:text-6xl"
-                            style="font-family:'Menlo'">
-                                CHOOSE YOUR
-                            </h2>
-                            <h1 class="max-w-5xl text-5xl font-bold text-center md:text-7xl"
-                            style="font-family:'Menlo'">
-                                INPUTS
-                            </h1>
-                            <hr>
-                            <p class="max-w-xl text-xl text-center font-bold"
-                            style="font-family:'Menlo'">
-                                NAME A SONG THAT YOU LIKE:
-                            </p>
-                            <div class="flex justify-center">
-                                <input type="text" list="songs" style="padding-left: 10px;">
-                                <label for="songs">
-                                    <datalist id="songs">
-                                    <select>
-                                        <option value="National Anthem">Chris Stapleton</option>
-                                        <option value="Patty Cake">Jack Johnson</option>
-                                        <option value="Happy Birthday">Sting</option>
-                                        <option value="Wrecking Ball">Miley Cyrus</option>
-                                    </select>
-                                    </datalist>
-                                </label>
+                        <form action="/output" method="post" name="myForm">
+                            <div class="flex flex-col py-6 mb-10 space-y-4">
+                                <h2 class="max-w-5xl text-5xl font-bold text-center md:text-6xl"
+                                style="font-family:'Menlo'">
+                                    CHOOSE YOUR
+                                </h2>
+                                <h1 class="max-w-5xl text-5xl font-bold text-center md:text-7xl"
+                                style="font-family:'Menlo'">
+                                    INPUTS
+                                </h1>
+                                <hr>
+                                <p class="max-w-xl text-xl text-center font-bold"
+                                style="font-family:'Menlo'">
+                                    NAME A SONG THAT YOU LIKE:
+                                </p>
+                                <div class="flex justify-center">
+                                    <input type="text" list="songs" style="padding-left: 10px;">
+                                    <label for="songs">
+                                        <datalist id="songs">
+                                        <select>
+                                            <option value="National Anthem">Chris Stapleton</option>
+                                            <option value="Patty Cake">Jack Johnson</option>
+                                            <option value="Happy Birthday">Sting</option>
+                                            <option value="Wrecking Ball">Miley Cyrus</option>
+                                        </select>
+                                        </datalist>
+                                    </label>
+                                </div>
+                                <p class="max-w-xl text-xl text-center font-bold"
+                                style="font-family:'Menlo'">
+                                    NAME AN ARTIST THAT YOU LIKE:
+                                </p>
+                                <div class="flex justify-center">
+                                    <input type="text" list="artists" style="padding-left: 10px;">
+                                    <label for="artists">
+                                        <datalist id="artists">
+                                        <select>
+                                            <option value="Metallica">Metallica</option>
+                                            <option value="Halsey">Halsey</option>
+                                            <option value="Beyonce">Beyonce</option>
+                                            <option value="Kanye">Kanye</option>
+                                        </select>
+                                        </datalist>
+                                    </label>
+                                </div>
+                                <p class="max-w-xl text-xl text-center font-bold"
+                                style="font-family:'Menlo'">
+                                    NAME A TIME PERIOD OF MUSIC THAT YOU LIKE:
+                                </p>
+                                <div class="flex justify-center">
+                                    <input type="text" list="period" style="padding-left: 10px;">
+                                    <label for="period">
+                                        <datalist id="period">
+                                        <select>
+                                            <option value="1970s">1970s</option>
+                                            <option value="1980s">1980s</option>
+                                            <option value="1990s">1990s</option>
+                                            <option value="2000s">2000s</option>
+                                        </select>
+                                        </datalist>
+                                    </label>
+                                </div>
+                                <p class="max-w-xl text-xl text-center font-bold"
+                                style="font-family:'Menlo'">
+                                    NAME YOUR DESIRED PLAYLIST DURATION
+                                </p>
+                                <p class="max-w-xl text-xl text-center font-bold"
+                                style="font-family:'Menlo'">
+                                    (IN MINUTES):
+                                </p>
+                                <div class="flex justify-center">
+                                    <input type="text" list="time" style="padding-left: 10px;">
+                                    <label for="time">
+                                        <datalist id="time">
+                                        <select>
+                                            <option value="20">20</option>
+                                            <option value="40">40</option>
+                                            <option value="60">60</option>
+                                            <option value="120">120</option>
+                                        </select>
+                                        </datalist>
+                                    </label>
+                                </div>
                             </div>
-                            <p class="max-w-xl text-xl text-center font-bold"
-                            style="font-family:'Menlo'">
-                                NAME AN ARTIST THAT YOU LIKE:
-                            </p>
-                            <div class="flex justify-center">
-                                <input type="text" list="artists" style="padding-left: 10px;">
-                                <label for="artists">
-                                    <datalist id="artists">
-                                    <select>
-                                        <option value="Metallica">Metallica</option>
-                                        <option value="Halsey">Halsey</option>
-                                        <option value="Beyonce">Beyonce</option>
-                                        <option value="Kanye">Kanye</option>
-                                    </select>
-                                    </datalist>
-                                </label>
-                            </div>
-                            <p class="max-w-xl text-xl text-center font-bold"
-                            style="font-family:'Menlo'">
-                                NAME A TIME PERIOD OF MUSIC THAT YOU LIKE:
-                            </p>
-                            <div class="flex justify-center">
-                                <input type="text" list="period" style="padding-left: 10px;">
-                                <label for="period">
-                                    <datalist id="period">
-                                    <select>
-                                        <option value="1970s">1970s</option>
-                                        <option value="1980s">1980s</option>
-                                        <option value="1990s">1990s</option>
-                                        <option value="2000s">2000s</option>
-                                    </select>
-                                    </datalist>
-                                </label>
-                            </div>
-                            <p class="max-w-xl text-xl text-center font-bold"
-                            style="font-family:'Menlo'">
-                                NAME YOUR DESIRED PLAYLIST DURATION
-                            </p>
-                            <p class="max-w-xl text-xl text-center font-bold"
-                            style="font-family:'Menlo'">
-                                (IN MINUTES):
-                            </p>
-                            <div class="flex justify-center">
-                                <input type="text" list="time" style="padding-left: 10px;">
-                                <label for="time">
-                                    <datalist id="time">
-                                    <select>
-                                        <option value="20">20</option>
-                                        <option value="40">40</option>
-                                        <option value="60">60</option>
-                                        <option value="120">120</option>
-                                    </select>
-                                    </datalist>
-                                </label>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="flex justify-center py-6 space-x-4 mt-6">
                     <button id="output" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">GENERATE PLAYLIST</button>
                     <button id="home" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">BACK TO HOME</button>
                 </div>
+                <script src="script.js"></script>
                 <script>
                     document.querySelector('#output').onclick = function() {
                     window.location.href = 'output.html';
