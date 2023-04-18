@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Output Page</title>
+    <style>
+        body {
+            background-image: url("images/spacebg.jpeg");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td {
+          text-align: left;
+          padding: 8px;
+          font-family: 'Menlo';
+          font-weight: bold;
+        }
+        th {
+          background-color: #eaa825;
+        }
+        td:last-child, th:last-child {
+            text-align: right;
+        }
+        </style>
+</head>
+<body>
+    <section id="text">
+        <!--Flex container-->
+        <div class="flex flex-col items-center py-10 mb-10 lg:w-3/4 md:w-3/4 sm:w-3/4">
+            <div class="w3-teal w3-round-large">
+                <div class="container items-center px-6 mt-4 space-y-0">
+                    <!-- coming soon and paragraph -->
+                    <div class="flex flex-col py-6 mb-10 space-y-4">
+                        <h1 class="max-w-5xl text-5xl font-bold text-center w3-text-amber md:text-7xl"
+                        style="font-family:'Menlo'">
+                            RESULTS
+                        </h1>
+                        <table>
+                            <tr>
+                              <th>SONG</th>
+                              <th>ARTIST</th>
+                              <th>SONG LENGTH</th>
+                            </tr>
+                            <tr>
+                              <td>MASTER OF PUPPETS</td>
+                              <td>METALLICA</td>
+                              <td>9:49</td>
+                            </tr>
+                            <tr>
+                              <td>BOHEMIAN RHAPSODY</td>
+                              <td>QUEEN</td>
+                              <td>5:55</td>
+                            </tr>
+                            <tr>
+                              <td>STAIRWAY TO HEAVEN</td>
+                              <td>LED ZEPPELIN</td>
+                              <td>8:02</td>
+                            </tr>
+                          </table>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center py-6 space-x-4 mt-6">
+                <button id="home" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">BACK TO HOME</button>
+                <button id="input" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">CREATE A NEW PLAYLIST</button>
+        </div>
+        <script>
+                document.querySelector('#input').onclick = function() {
+                window.location.href = 'input.html';
+                }
+        </script>
+        <script>
+                document.querySelector('#home').onclick = function() {
+                window.location.href = 'home.html';
+                }
+        </script>
+        </div>
+    </section>
+</body>
+</html>
