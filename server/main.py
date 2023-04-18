@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
 from api import artists, songs, cluster
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -16,19 +17,23 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class PlaylistData(BaseModel):
+    playlistSize: int
+    artistName: str
+    songTitle: str
+    playlistYear: int
+
 @app.post("/api/generate_music")
 async def generate_music(
-    playlistSize: int = Form(...),
-    artistName: str = Form(...),
-    songTitle: str = Form(...),
-    playlistYear: int = Form(...),
+    playlist_data: PlaylistData
 ):
     form_data = {
-        "playlistSize": playlistSize,
-        "artistName": artistName,
-        "songTitle": songTitle,
-        "playlistYear": playlistYear,
+        "playlistSize": playlist_data.playlistSize,
+        "artistName": playlist_data.artistName,
+        "songTitle": playlist_data.songTitle,
+        "playlistYear": playlist_data.playlistYear,
     }
+    print(form_data)
 
     resp = cluster.cluster(form_data["songTitle"], form_data["artistName"], form_data["playlistYear"], form_data["playlistSize"])
 

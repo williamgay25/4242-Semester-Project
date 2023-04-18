@@ -55,12 +55,12 @@
     
     <body>
         <section id="text">
-            <!--Flex container-->
+            <form action="/output" method="post" name="myForm">
+                <!--Flex container-->
             <div class="flex flex-col items-center py-10 mb-10 lg:w-3/4 md:w-3/4 sm:w-3/4">
                 <div class="w3-teal w3-round-large">
                     <div class="container items-center px-6 mt-4 space-y-0">
                         <!-- coming soon and paragraph -->
-                        <form action="/output" method="post" name="myForm">
                             <div class="flex flex-col py-6 mb-10 space-y-4">
                                 <h2 class="max-w-5xl text-5xl font-bold text-center md:text-6xl"
                                 style="font-family:'Menlo'">
@@ -79,12 +79,6 @@
                                     <input type="text" list="songs" style="padding-left: 10px;">
                                     <label for="songs">
                                         <datalist id="songs">
-                                        <select>
-                                            <option value="National Anthem">Chris Stapleton</option>
-                                            <option value="Patty Cake">Jack Johnson</option>
-                                            <option value="Happy Birthday">Sting</option>
-                                            <option value="Wrecking Ball">Miley Cyrus</option>
-                                        </select>
                                         </datalist>
                                     </label>
                                 </div>
@@ -96,12 +90,6 @@
                                     <input type="text" list="artists" style="padding-left: 10px;">
                                     <label for="artists">
                                         <datalist id="artists">
-                                        <select>
-                                            <option value="Metallica">Metallica</option>
-                                            <option value="Halsey">Halsey</option>
-                                            <option value="Beyonce">Beyonce</option>
-                                            <option value="Kanye">Kanye</option>
-                                        </select>
                                         </datalist>
                                     </label>
                                 </div>
@@ -143,26 +131,22 @@
                                         </datalist>
                                     </label>
                                 </div>
-                            </div>
-                        </form>
+                            </div>        
+                        </div>
                     </div>
+                    <div class="flex justify-center py-6 space-x-4 mt-6">
+                        <button id="output" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'" type="submit">GENERATE PLAYLIST</button>
+                        <button id="home" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">BACK TO HOME</button>
+                    </div>
+                    <script src="script.js"></script>
+                    
+                    <script>
+                        document.querySelector('#home').onclick = function() {
+                        window.location.href = 'index.html';
+                        }
+                    </script>
                 </div>
-                <div class="flex justify-center py-6 space-x-4 mt-6">
-                    <button id="output" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">GENERATE PLAYLIST</button>
-                    <button id="home" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">BACK TO HOME</button>
-                </div>
-                <script src="script.js"></script>
-                <script>
-                    document.querySelector('#output').onclick = function() {
-                    window.location.href = 'output.html';
-                    }
-                </script>
-                <script>
-                    document.querySelector('#home').onclick = function() {
-                    window.location.href = 'home.html';
-                    }
-                </script>
-            </div>
+            </form>
         </section>
     </body>
 </html>

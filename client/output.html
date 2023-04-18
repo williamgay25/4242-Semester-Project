@@ -76,13 +76,44 @@
                 <button id="input" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">CREATE A NEW PLAYLIST</button>
         </div>
         <script>
+          // Read the data from local storage and parse it
+          const playlistData = JSON.parse(localStorage.getItem('playlistData'));
+      
+          // Populate the table with the data
+          const table = document.querySelector('table');
+          for (let i = 0; i < playlistData.length; i++) {
+              const group = playlistData[i];
+              for (let j = 0; j < group.length; j++) {
+                  const item = group[j];
+                  const row = document.createElement('tr');
+      
+                  const songCell = document.createElement('td');
+                  songCell.innerText = item.song;
+                  row.appendChild(songCell);
+      
+                  const artistCell = document.createElement('td');
+                  artistCell.innerText = item.artist;
+                  row.appendChild(artistCell);
+      
+                  const lengthCell = document.createElement('td');
+                  lengthCell.innerText = item.length;
+                  row.appendChild(lengthCell);
+      
+                  table.appendChild(row);
+              }
+          }
+      
+          // Delete the data from local storage
+          localStorage.removeItem('playlistData');
+      </script>
+        <script>
                 document.querySelector('#input').onclick = function() {
                 window.location.href = 'input.html';
                 }
         </script>
         <script>
                 document.querySelector('#home').onclick = function() {
-                window.location.href = 'home.html';
+                window.location.href = 'index.html';
                 }
         </script>
         </div>

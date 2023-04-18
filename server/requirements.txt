@@ -2,3 +2,6 @@ pandas
 numpy
 fastapi
 scikit-learn
+python-multipart
+uvicorn
+pydantic

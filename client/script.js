@@ -1,30 +1,30 @@
 const form = document.forms.myForm;
-const playlistElement = document.getElementById('playlist'); // Add this line
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    console.log(formData)
-    const response = await fetch('http://localhost:5000/api/generate_music', {
-        method: 'POST',
-        body: formData
-    });
-    const data = await response.json();
+    const data = {};
+
+    for (let [key, value] of formData.entries()) {
+        data[key] = value;
+    }
     console.log(data);
     
-    playlistElement.innerHTML = '';
+    const response = await fetch('http://localhost:5000/api/generate_music', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const responseData = await response.json();
+    console.log(responseData);
 
-    // Add the response data to the playlist element
-    for (let i = 0; i < data.length; i++) {
-        const group = data[i];
-        const groupElement = document.createElement('ul');
-        for (let j = 0; j < group.length; j++) {
-            const itemElement = document.createElement('li');
-            itemElement.innerText = group[j];
-            groupElement.appendChild(itemElement);
-        }
-        playlistElement.appendChild(groupElement);
-    }
+    // Save data to local storage
+    localStorage.setItem('playlistData', JSON.stringify(responseData));
+
+    // Redirect to the output page
+    // window.location.href = 'output.html';
 });
 
 async function fetchArtists() {
@@ -41,23 +41,24 @@ async function fetchSongs() {
   
 async function populateDropdowns() {
     const artists = await fetchArtists();
-    const artistDropdown = document.getElementById("artist");
+    const artistDropdown = document.getElementById("artists");
+    
 
     artists.forEach((artist) => {
         const option = document.createElement("option");
         option.value = artist;
         option.text = artist;
-        artistDropdown.add(option);
+        artistDropdown.appendChild(option);
     });
     
     const songs = await fetchSongs();
-    const songDropdown = document.getElementById("title");
+    const songDropdown = document.getElementById("songs");
   
     songs.forEach((song) => {
       const option = document.createElement("option");
       option.value = song;
       option.text = song;
-      songDropdown.add(option);
+      songDropdown.appendChild(option);
     });
   }
   
