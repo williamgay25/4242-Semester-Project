@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
-from api.endpoints import artists, songs, cluster
+from api import artists, songs, cluster
 
 app = FastAPI()
 
