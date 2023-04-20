@@ -1,4 +1,4 @@
-# GAMP
+# GAMP - Generate a Music Playlist
 
 Welcome to GAMP! This is an inefficient web application for generating new playlists, built for a class project. Please note that the client and server each have their own README files, which provide additional information on how to run and use each component.
 
