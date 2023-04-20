@@ -50,22 +50,7 @@
                             <tr>
                               <th>SONG</th>
                               <th>ARTIST</th>
-                              <th>SONG LENGTH</th>
-                            </tr>
-                            <tr>
-                              <td>MASTER OF PUPPETS</td>
-                              <td>METALLICA</td>
-                              <td>9:49</td>
-                            </tr>
-                            <tr>
-                              <td>BOHEMIAN RHAPSODY</td>
-                              <td>QUEEN</td>
-                              <td>5:55</td>
-                            </tr>
-                            <tr>
-                              <td>STAIRWAY TO HEAVEN</td>
-                              <td>LED ZEPPELIN</td>
-                              <td>8:02</td>
+                              <th>LENGTH</th>
                             </tr>
                           </table>
                 </div>
@@ -76,33 +61,38 @@
                 <button id="input" class="w3-button w3-teal w3-round-large" style="font-family:'Menlo'">CREATE A NEW PLAYLIST</button>
         </div>
         <script>
-          // Read the data from local storage and parse it
           const playlistData = JSON.parse(localStorage.getItem('playlistData'));
-      
+
+          // Convert array of arrays to array of objects
+          const playlist = playlistData.map(item => {
+            return {
+              song: item[0],
+              artist: item[1],
+              length: Math.round(item[2] / 60 * 100) / 100 + ' min'
+            };
+          });
+
           // Populate the table with the data
           const table = document.querySelector('table');
-          for (let i = 0; i < playlistData.length; i++) {
-              const group = playlistData[i];
-              for (let j = 0; j < group.length; j++) {
-                  const item = group[j];
-                  const row = document.createElement('tr');
-      
-                  const songCell = document.createElement('td');
-                  songCell.innerText = item.song;
-                  row.appendChild(songCell);
-      
-                  const artistCell = document.createElement('td');
-                  artistCell.innerText = item.artist;
-                  row.appendChild(artistCell);
-      
-                  const lengthCell = document.createElement('td');
-                  lengthCell.innerText = item.length;
-                  row.appendChild(lengthCell);
-      
-                  table.appendChild(row);
-              }
+          for (let i = 0; i < playlist.length; i++) {
+            const item = playlist[i];
+            const row = document.createElement('tr');
+
+            const songCell = document.createElement('td');
+            songCell.innerText = item.song;
+            row.appendChild(songCell);
+
+            const artistCell = document.createElement('td');
+            artistCell.innerText = item.artist;
+            row.appendChild(artistCell);
+
+            const lengthCell = document.createElement('td');
+            lengthCell.innerText = item.length;
+            row.appendChild(lengthCell);
+
+            table.appendChild(row);
           }
-      
+
           // Delete the data from local storage
           localStorage.removeItem('playlistData');
       </script>
