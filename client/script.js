@@ -3,12 +3,19 @@ const form = document.forms.myForm;
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const data = {};
 
-    for (let [key, value] of formData.entries()) {
-        data[key] = value;
-    }
-    console.log(data);
+    console.log("Form data")
+    console.log(formData)
+
+    const data = {
+        playlistSize: formData.get('duration'),
+        artistName: formData.get('artist'),
+        songTitle: formData.get('song'),
+        playlistYear: parseInt(formData.get('period').slice(0, -1), 10),
+    };
+
+    console.log("Data")
+    console.log(data)
     
     const response = await fetch('http://localhost:5000/api/generate_music', {
         method: 'POST',
@@ -18,7 +25,13 @@ form.addEventListener('submit', async (event) => {
         body: JSON.stringify(data)
     });
     const responseData = await response.json();
+
+    console.log("Response data");
     console.log(responseData);
+
+    if (response.status === 422) {
+        console.error("Validation errors:", responseData.detail);
+    }
 
     // Save data to local storage
     localStorage.setItem('playlistData', JSON.stringify(responseData));

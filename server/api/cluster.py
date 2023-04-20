@@ -2,9 +2,7 @@ import os
 import time
 import numpy as np
 import pandas as pd
-from sklearn.cluster import DBSCAN
 from sklearn.cluster import OPTICS
-
 
 def cluster(seed_song = None, artist = None, year = None, length = 2000):
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.csv')
@@ -13,19 +11,22 @@ def cluster(seed_song = None, artist = None, year = None, length = 2000):
     
     #Inputs here Please
     inputs = {"Seed Song": seed_song, "Artist": artist, "Year": year, "Length": length}
+
+    print(inputs)
     
     artists = []
     decades = []
     
     #Manipulates data based on presence of a seed song
     if (inputs["Seed Song"] != None):
-        seed_row = data.loc[data["song_title"] == inputs["Seed Song"]]
-        data = pd.concat([data, seed_row], ignore_index=True)
+        seed_row = big_data.loc[data["song_title"] == inputs["Seed Song"]]
+        data = data.append(seed_row, big_data = True)
         artists.append(seed_row["artist_name"].iloc[0])
         decades.append(seed_row["year"].iloc[0])
         
         data["key"] = np.where(data["key"] == seed_row["key"].iloc[0], 1, 0)
-        data["time_signature"] = np.where(data["time_signature"] == seed_row["time_signature"].iloc[0], 1, 0)
+        data["time_signature"] = np.where(data["time_signature"] == seed_row["time_signature"].iloc[0], 1, 0) 
+    
     #Default settings for no seed song
     else:
         data["key"] = 0

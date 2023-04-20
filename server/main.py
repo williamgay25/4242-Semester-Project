@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from api import artists, songs, cluster
 from pydantic import BaseModel
@@ -11,7 +11,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,7 +33,6 @@ async def generate_music(
         "songTitle": playlist_data.songTitle,
         "playlistYear": playlist_data.playlistYear,
     }
-    print(form_data)
 
     resp = cluster.cluster(form_data["songTitle"], form_data["artistName"], form_data["playlistYear"], form_data["playlistSize"])
 
