@@ -37,7 +37,7 @@ form.addEventListener('submit', async (event) => {
     localStorage.setItem('playlistData', JSON.stringify(responseData));
 
     // Redirect to the output page
-    // window.location.href = 'output.html';
+    window.location.href = 'output.html';
 });
 
 async function fetchArtists() {

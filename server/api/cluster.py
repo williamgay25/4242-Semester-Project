@@ -8,25 +8,27 @@ def cluster(seed_song = None, artist = None, year = None, length = 2000):
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.csv')
     big_data = pd.read_csv(data_file_path, index_col=0)
     data = big_data.sample(frac = 0.02).reset_index(drop=True)
+
+    print("Big data index: ", big_data.index)
+    print("Data index: ", data.index)
     
     #Inputs here Please
     inputs = {"Seed Song": seed_song, "Artist": artist, "Year": year, "Length": length}
-
-    print(inputs)
     
     artists = []
     decades = []
     
     #Manipulates data based on presence of a seed song
     if (inputs["Seed Song"] != None):
+        print(data["song_title"])
+        print(inputs["Seed Song"])
         seed_row = big_data.loc[data["song_title"] == inputs["Seed Song"]]
         data = data.append(seed_row, big_data = True)
         artists.append(seed_row["artist_name"].iloc[0])
         decades.append(seed_row["year"].iloc[0])
         
         data["key"] = np.where(data["key"] == seed_row["key"].iloc[0], 1, 0)
-        data["time_signature"] = np.where(data["time_signature"] == seed_row["time_signature"].iloc[0], 1, 0) 
-    
+        data["time_signature"] = np.where(data["time_signature"] == seed_row["time_signature"].iloc[0], 1, 0)
     #Default settings for no seed song
     else:
         data["key"] = 0
@@ -41,7 +43,7 @@ def cluster(seed_song = None, artist = None, year = None, length = 2000):
     
     #Sets up year feature
     if (inputs["Year"] != None):
-        decades.append(inputs["Year"])
+        decades.append(inputs["year"])
     
     decades = [int(np.floor(x/10.0)*10) for x in decades]
     
@@ -88,5 +90,5 @@ def cluster(seed_song = None, artist = None, year = None, length = 2000):
             
         eligible_songs = eligible_songs.drop(0)
         
-    print(playlist)
+    #print(playlist)
     return playlist
