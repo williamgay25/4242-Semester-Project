@@ -14,6 +14,6 @@ It's worth noting that GAMP was intentionally built to be inefficient, as a lear
 
 We would like to give a special shoutout to our team for their contributions to this project:
 
-@afix8 ...
+@afix8 @dtsui9 ...
 
 Their hard work and dedication made this project possible. Thank you!
