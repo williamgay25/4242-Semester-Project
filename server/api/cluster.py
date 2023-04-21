@@ -60,13 +60,13 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     
     #Runs CLustering Algorithm. Uses OPTICS instead of DBSCAN Due to Memory Issues
     #print("Its Clusterin Time")
-    t1 = time.time()
+    #t1 = time.time()
     
     data = data.dropna()
     #print(data.columns)
     clustering = OPTICS(max_eps = 3, min_samples=10).fit(data.iloc[:,np.r_[2, 4:14]])
     
-    t2 = time.time()
+    #t2 = time.time()
     #print('Clustering Completed In:', str(datetime.timedelta(seconds=t2-t1)))
     
     data["Cluster"] = clustering.labels_
@@ -76,6 +76,19 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     if (inputs["Seed Song"] != None and seed_existence):
         chosen_label = data.loc[data["song_title"] == inputs["Seed Song"]]["Cluster"].iloc[0]
         eligible_songs = data.loc[data["Cluster"] == chosen_label]
+    elif (inputs["Year"] != None):
+        greatest_cluster = 0
+        greatest_percentage = 0
+        for i in clustering.labels_:
+            if(i==-1):
+                continue
+            curr_cluster = data.loc[data["Cluster"] == i].to_numpy()
+            percentage = np.sum(curr_cluster == inputs["Year"])/len(curr_cluster)
+            if (percentage >= greatest_percentage):
+                greatest_percentage = percentage
+                greatest_cluster = i
+        eligible_songs = data.loc[data["Cluster"] == greatest_cluster]
+        
     else:
         min_index = np.bincount(clustering.labels_+1).argmin()-1
         eligible_songs = data.loc[data["Cluster"] == min_index]
@@ -87,11 +100,11 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     remaining_time = inputs["Length"]
     while (remaining_time > 0 and len(eligible_songs) > 0):
         eligible_songs = eligible_songs.sample(frac = 1).reset_index(drop=True)
-        if (eligible_songs["duration"].iloc[0] <= remaining_time):
-            playlist.append([eligible_songs["song_title"].iloc[0], eligible_songs["artist_name"].iloc[0], eligible_songs["duration"].iloc[0]])
-            remaining_time -= eligible_songs["duration"].iloc[0]
+        
+        playlist.append([eligible_songs["song_title"].iloc[0], eligible_songs["artist_name"].iloc[0], eligible_songs["duration"].iloc[0]])
+        remaining_time -= eligible_songs["duration"].iloc[0]
             
         eligible_songs = eligible_songs.drop(0)
         
-    print(playlist)
+    #print(playlist)
     return playlist
