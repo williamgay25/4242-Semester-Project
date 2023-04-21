@@ -98,6 +98,7 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     #Randomly sample songs out of cluster while keeping within the time limit
     playlist = []
     remaining_time = inputs["Length"]
+    print(inputs)
     while (remaining_time > 0 and len(eligible_songs) > 0):
         eligible_songs = eligible_songs.sample(frac = 1).reset_index(drop=True)
         
@@ -106,5 +107,5 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
             
         eligible_songs = eligible_songs.drop(0)
         
-    #print(playlist)
+    print(playlist)
     return playlist

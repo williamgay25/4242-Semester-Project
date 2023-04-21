@@ -7,11 +7,16 @@ form.addEventListener('submit', async (event) => {
     console.log("Form data")
     console.log(formData)
 
+    const playlistSize = formData.get('duration');
+    const artistName = formData.get('artist');
+    const songTitle = formData.get('song');
+    const playlistYear = parseInt(formData.get('period').slice(0, -1), 10);
+
     const data = {
-        playlistSize: formData.get('duration'),
-        artistName: formData.get('artist'),
-        songTitle: formData.get('song'),
-        playlistYear: parseInt(formData.get('period').slice(0, -1), 10),
+        playlistSize: playlistSize ? playlistSize : null,
+        artistName: artistName ? artistName : null,
+        songTitle: songTitle ? songTitle : null,
+        playlistYear: playlistYear ? playlistYear : 0,
     };
 
     console.log("Data")
