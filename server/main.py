@@ -26,10 +26,7 @@ class PlaylistData(BaseModel):
 
     @validator('playlistYear', pre=True, always=True)
     def default_year(cls, value):
-        if value is None:
-            return 0
-        else:
-            return value
+        return value
 
 @app.post("/api/generate_music")
 async def generate_music(
