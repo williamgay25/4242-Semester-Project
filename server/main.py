@@ -19,7 +19,7 @@ app.add_middleware(
 )
 
 class PlaylistData(BaseModel):
-    playlistSize: Optional[str]
+    playlistSize: Optional[int]
     artistName: Optional[str]
     songTitle: Optional[str]
     playlistYear: Optional[int]
