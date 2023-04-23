@@ -27,7 +27,10 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
             data = data.drop_duplicates()
             
             artists.append(seed_row["artist_name"].iloc[0])
-            decades.append(seed_row["year"].iloc[0])
+            
+            song_year = seed_row["year"].iloc[0]
+            if (song_year > 0):
+                decades.append(song_year)
             
             data["key"] = np.where(data["key"] == seed_row["key"].iloc[0], 1, 0)
             data["time_signature"] = np.where(data["time_signature"] == seed_row["time_signature"].iloc[0], 1, 0)
@@ -48,9 +51,9 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
         decades.append(inputs["Year"])
     
     decades = [int(np.floor(x/10.0)*10) for x in decades]
-    
+    #print(decades)
     data["year"] = ((data["year"]/10.0).apply(np.floor)*10).astype('int')
-    data["year"] = np.where(data["year"].isin(decades), 1, 0)
+    data["norm_year"] = np.where(data["year"].isin(decades), 1, 0)
     
     #Normalizes data
     data["norm_duration"] = data["duration"]/data["duration"].max()
@@ -64,7 +67,7 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     
     data = data.dropna()
     #print(data.columns)
-    clustering = OPTICS(max_eps = 3, min_samples=10).fit(data.iloc[:,np.r_[2, 4:14]])
+    clustering = OPTICS(max_eps = 3, min_samples=10).fit(data.iloc[:,np.r_[2, 4:11, 12:15]])
     
     #t2 = time.time()
     #print('Clustering Completed In:', str(datetime.timedelta(seconds=t2-t1)))
@@ -76,17 +79,22 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     if (inputs["Seed Song"] != None and seed_existence):
         chosen_label = data.loc[data["song_title"] == inputs["Seed Song"]]["Cluster"].iloc[0]
         eligible_songs = data.loc[data["Cluster"] == chosen_label]
-    elif (inputs["Year"] != None):
+    elif (inputs["Year"] != None or inputs["Artist"] != None):
         greatest_cluster = 0
         greatest_percentage = 0
         for i in clustering.labels_:
             if(i==-1):
                 continue
-            curr_cluster = data.loc[data["Cluster"] == i].to_numpy()
-            percentage = np.sum(curr_cluster == inputs["Year"])/len(curr_cluster)
+            curr_cluster = data.loc[data["Cluster"] == i]
+            percentage = (np.sum(curr_cluster["year"].to_numpy() == inputs["Year"]) + np.sum(curr_cluster["artist_name"].to_numpy() == inputs["Artist"]))/len(curr_cluster)
+            #print(np.sum(curr_cluster["year"].to_numpy() == inputs["Year"]))
+            #print(np.sum(curr_cluster["artist_name"].to_numpy() == inputs["Artist"]))
+            #print(len(curr_cluster))
+            #print(percentage)
             if (percentage >= greatest_percentage):
                 greatest_percentage = percentage
                 greatest_cluster = i
+                
         eligible_songs = data.loc[data["Cluster"] == greatest_cluster]
         
     else:
@@ -98,7 +106,6 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
     #Randomly sample songs out of cluster while keeping within the time limit
     playlist = []
     remaining_time = inputs["Length"]
-    print(inputs)
     while (remaining_time > 0 and len(eligible_songs) > 0):
         eligible_songs = eligible_songs.sample(frac = 1).reset_index(drop=True)
         
@@ -107,5 +114,5 @@ def cluster(seed_song = None, artist = None, year = None, length = 35):
             
         eligible_songs = eligible_songs.drop(0)
         
-    print(playlist)
+    #print(playlist)
     return playlist
