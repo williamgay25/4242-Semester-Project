@@ -15,9 +15,12 @@ It's worth noting that GAMP was intentionally built to be inefficient, as a lear
 To get started with GAMP, please follow the steps below:
 
 1. Clone the repository to your local machine using Git.
-2. Open a terminal window and navigate to the project directory using `cd`.
-3. There are two directories, one for the client and one for the server. Navigate into each directory using `cd`.
-4. Follow the instructions in the `README` file in each directory to start the respective servers. Each directory will have a different server started to communicate with each other.
+2. Open two terminal windows and navigate to the project directory using `cd` in both windows.
+3. In one of the terminal windows, navigate to the client directory using `cd client`.
+4. Follow the instructions in the `README` file in the client directory to start the client server.
+5. In the other terminal window, navigate to the server directory using `cd server`.
+6. Follow the instructions in the `README` file in the server directory to start the server.
+7. Both the client and server servers must be running in order for GAMP to work properly.
 
 We hope you enjoy using GAMP and learning from our project! 
 
