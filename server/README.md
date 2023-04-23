@@ -1,5 +1,5 @@
 # Getting Started on the Server Side
-If you are using windows, you may need to use MINGW/Git Bash which can be downloaded here. https://git-scm.com/downloads
+If you are using windows, you may need to use MINGW/Git Bash or any other command line that can run linux commands which can be downloaded here. https://git-scm.com/downloads
 1. Set up a Python virtual environment and install the required packages by running the setup script:
 ```shell
 chmod +x setup.sh
