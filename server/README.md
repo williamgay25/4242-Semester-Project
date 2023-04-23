@@ -9,6 +9,8 @@ chmod +x setup.sh
 2. Start up the virtual environment
 ```shell
 source .venv/bin/activate
+
+If this does not work try .venv/Scripts/activate or go into the server directory and type the directory the activate folder is located in.
 ```
 
 2. Boot up the server by running the main script
